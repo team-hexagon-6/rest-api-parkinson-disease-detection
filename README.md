@@ -34,7 +34,10 @@
 >**access_token:**`f7a50a548fbccdfc1d960d9f3f97ecfe241205b9a35d9fbefd562828f5e34265`
 ####
 >**API URL query parameters:** `http://127.0.0.1:5000/api?user_id=1234&access_token=f7a50a548fbccdfc1d960d9f3f97ecfe241205b9a35d9fbefd562828f5e34265`
-
+####
+![enter image description here](https://github.com/team-hexagon-6/rest-api-parkinson-disease-detection/blob/main/api-images/Screenshot%202022-04-13%20033130.png)
 
 ## Data Sending Example
 >**Data:** `image data should be send as form data base64 encoded`
+####
+![enter image description here](https://github.com/team-hexagon-6/rest-api-parkinson-disease-detection/blob/main/api-images/Screenshot%202022-04-13%20033205.png)

@@ -49,7 +49,7 @@ def predict(image, typo):
         return print('Type Error')
 
     # return {'type': typo, 'disease':'0' if pred[0]==0 else '1'}
-    return typo, '0' if pred[0] == 0 else '1'
+    return typo, 'healthy' if pred[0] == 0 else 'disease'
 
 
 def string_to_image(base64_string):
@@ -62,11 +62,14 @@ def toRGB(image):
 
 
 class PredictClass(Resource):
-    def get(self):
+    def post(self):
         # data = request.data
+        print("hello world")
         args = request.args
         user_id = args.get('user_id', default='', type=str)
         access_token = args.get('access_token', default='', type=str)
+        print("access token :", access_token)
+        print("user id :", user_id)
 
         if not db_users.__contains__(user_id):
             return make_response(jsonify({
@@ -81,10 +84,21 @@ class PredictClass(Resource):
                 "status": 401,
                 "message": "invalid token"
             }), 401)
+        print("hello world -2 ")
 
-        image_file = request.form['image']
-        typo = request.form["type"]
+        image_file = None
+        typo = None
+        try:
+            image_file = request.form['image']
+            typo = request.form["type"]
+        except Exception as e:
+            print('ERROR :', e)
+
+        print("hello world -3 ")
+        # print("image files :",image_file)
+        print("type :", typo)
         if image_file is None:
+            print("here - image file is missing  ")
             return make_response(jsonify({
                 "error": "bad request",
                 "status": 400,
@@ -92,6 +106,7 @@ class PredictClass(Resource):
             }), 400)
 
         if typo is None:
+            print("here -2 type value is missing here ")
             return make_response(jsonify({
                 "error": "bad request",
                 "status": 400,
@@ -99,6 +114,7 @@ class PredictClass(Resource):
             }), 400)
 
         if typo != 'spiral' and typo != 'wave':
+            print("here -3 type value is invalid")
             return make_response(jsonify({
                 "error": "bad request",
                 "status": 400,

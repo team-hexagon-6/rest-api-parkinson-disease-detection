@@ -64,12 +64,12 @@ def toRGB(image):
 class PredictClass(Resource):
     def post(self):
         # data = request.data
-        print("hello world")
+        # print("hello world")
         args = request.args
         user_id = args.get('user_id', default='', type=str)
         access_token = args.get('access_token', default='', type=str)
-        print("access token :", access_token)
-        print("user id :", user_id)
+        # print("access token :", access_token)
+        # print("user id :", user_id)
 
         if not db_users.__contains__(user_id):
             return make_response(jsonify({
@@ -84,7 +84,7 @@ class PredictClass(Resource):
                 "status": 401,
                 "message": "invalid token"
             }), 401)
-        print("hello world -2 ")
+        # print("hello world -2 ")
 
         image_file = None
         typo = None
@@ -93,12 +93,17 @@ class PredictClass(Resource):
             typo = request.form["type"]
         except Exception as e:
             print('ERROR :', e)
+            return make_response(jsonify({
+                "error": "internal server error",
+                "status": 500,
+                "message": "cannot access form data"
+            }), 500)
 
-        print("hello world -3 ")
+        # print("hello world -3 ")
         # print("image files :",image_file)
-        print("type :", typo)
+        # print("type :", typo)
         if image_file is None:
-            print("here - image file is missing  ")
+            # print("here - image file is missing  ")
             return make_response(jsonify({
                 "error": "bad request",
                 "status": 400,
@@ -106,7 +111,7 @@ class PredictClass(Resource):
             }), 400)
 
         if typo is None:
-            print("here -2 type value is missing here ")
+            # print("here -2 type value is missing here ")
             return make_response(jsonify({
                 "error": "bad request",
                 "status": 400,
@@ -114,7 +119,7 @@ class PredictClass(Resource):
             }), 400)
 
         if typo != 'spiral' and typo != 'wave':
-            print("here -3 type value is invalid")
+            # print("here -3 type value is invalid")
             return make_response(jsonify({
                 "error": "bad request",
                 "status": 400,

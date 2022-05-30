@@ -1,2 +1,8 @@
 venv
+rest-api
 .idea
+.vscode
+__pycache__
+spiral
+wave
+

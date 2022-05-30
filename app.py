@@ -10,6 +10,7 @@ from flask_cors import CORS
 import base64
 from PIL import Image
 import io
+# import os 
 
 app = Flask(__name__)
 CORS(app)
@@ -149,8 +150,14 @@ class PredictClass(Resource):
 api.add_resource(PredictClass, '/api')
 
 # Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
-    # from waitress import serve
-    #
-    # serve(app, host="0.0.0.0", port=5000)
+# if __name__ == '__main__':
+#     app.run(debug=True, port=5000)
+#     # from waitress import serve
+#     #
+#     # serve(app, host="0.0.0.0", port=5000)
+
+# port = int(os.environ.get("PORT", 5000))
+# if __name__ == "__main__":
+#         app.run(host='0.0.0.0', port=port, debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
